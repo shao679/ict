@@ -1,0 +1,153 @@
+# PROJECT BRIEF  
+## ICT Strategy – Algorithmic Trading System  
+**Classification: Strict Compliance Required**
+
+---
+
+### 1. Purpose of This Document
+
+This document defines the mandatory requirements for the development of an algorithmic trading system based on the ICT methodology.  
+
+The attached file `ICT_Strategy_Technical_Spec.md` is the **single source of truth**.  
+
+Any deviation from the rules, definitions, or logic described in that specification is considered a critical failure.
+
+This is not a research project.  
+This is not a flexible interpretation exercise.  
+This is a precision engineering task.
+
+---
+
+### 2. Absolute Requirements
+
+1. The system **must** implement the strategy **exactly** as defined in the technical specification.
+2. No creative interpretation of the rules is allowed.
+3. No “improvements”, “optimizations”, or “simplifications” of the original logic are permitted without explicit written approval.
+4. Every detection algorithm (Swing, Order Block, FVG, Launch Pad, Market Structure, etc.) must produce deterministic and reproducible results.
+5. The system must fail loudly and clearly when data is insufficient or conditions are ambiguous — silent failures are unacceptable.
+
+---
+
+### 3. Core Engineering Principles (Non-Negotiable)
+
+- **Correctness over speed**
+- **Clarity over cleverness**
+- **Explicit over implicit**
+- **Testability over convenience**
+- **Determinism over flexibility**
+
+Any code that prioritizes performance or brevity at the expense of correctness or readability will be rejected.
+
+---
+
+### 4. Mandatory Architecture
+
+The system must be divided into clearly separated layers:
+
+1. **Data Layer**  
+   Responsible only for data ingestion, normalization, and timeframe aggregation.
+
+2. **Detection Layer**  
+   Pure functions that detect structures and patterns.  
+   Must have zero side effects.  
+   Must be fully unit-testable in isolation.
+
+3. **State Layer**  
+   Maintains Market Structure (MS High / MS Low), active Order Blocks, FVGs, and their validity status.
+
+4. **Decision Layer**  
+   Combines higher-timeframe context with lower-timeframe confirmation according to the exact rules in the specification.
+
+5. **Risk & Trade Management Layer**  
+   Calculates entry, stop, target, and position size.  
+   Enforces minimum Risk:Reward.
+
+6. **Execution / Simulation Layer**  
+   Handles both backtesting and live signal generation.
+
+Cross-layer contamination is not allowed.
+
+---
+
+### 5. Testing Requirements (Strict)
+
+- Every detection function must have comprehensive unit tests.
+- Edge cases must be explicitly tested (insufficient candles, gaps, doji candles, equal highs/lows, etc.).
+- Backtesting engine must be candle-by-candle and must not look into the future.
+- Results must be fully reproducible with the same input data.
+- A minimum of 2 years of historical data on at least two instruments (e.g. EURUSD and XAUUSD) must be backtested and reported.
+
+Code without proper tests will be rejected regardless of functionality.
+
+---
+
+### 6. Code Quality Standards
+
+- Type hints are mandatory.
+- All public functions must have clear docstrings explaining inputs, outputs, and assumptions.
+- Magic numbers are forbidden. All thresholds must be configurable.
+- No global state.
+- No hidden side effects.
+- Maximum function length should remain reasonable (prefer small, focused functions).
+- Naming must be precise and domain-driven (e.g. `is_valid_bearish_order_block`, not `check_ob`).
+
+---
+
+### 7. Deliverables (Complete Set)
+
+1. Full source code with clean project structure
+2. Complete unit test suite
+3. Configuration files (YAML or JSON)
+4. Backtesting report with detailed metrics
+5. Architecture documentation
+6. Clear instructions for running backtests and live mode
+7. List of all assumptions and limitations
+
+Incomplete deliverables will not be accepted.
+
+---
+
+### 8. Explicitly Forbidden
+
+- Adding machine learning or statistical filters unless requested
+- Changing the definition of Swing, Order Block, FVG, or Launch Pad
+- Using future data in any calculation
+- Ignoring the session filter or news filter
+- Implementing “smart” or “adaptive” logic that overrides the specification
+- Delivering prototype-quality or poorly structured code
+
+---
+
+### 9. Acceptance Criteria
+
+The system will only be accepted if:
+
+- It strictly follows every rule in the technical specification
+- Detection results are deterministic
+- The architecture is clean and maintainable
+- Test coverage on core logic is high
+- Backtesting results are consistent and explainable
+- A senior engineer can understand and extend the system without reverse-engineering
+
+---
+
+### 10. Process
+
+1. Confirm full understanding of the technical specification in writing.
+2. Raise all technical questions **before** writing production code.
+3. Provide regular progress updates with clear evidence of compliance.
+4. Any proposed change to the original logic must be submitted for approval before implementation.
+
+---
+
+**Final Note**
+
+We are not looking for a “working” system.  
+We are looking for a **correct**, **precise**, and **professionally engineered** system that faithfully implements the defined strategy.
+
+Quality and fidelity to the specification take absolute priority over speed of delivery.
+
+---
+
+Attached:  
+`ICT_Strategy_Technical_Spec.md` (Source of Truth)

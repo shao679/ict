@@ -1,0 +1,26 @@
+# Audio files must stay local, as requested by the project owner.
+*.[fF][lL][aA][cC]
+*.[mM]4[aA]
+*.[mM][pP]3
+*.[wW][aA][vV]
+*.[aA][aA][cC]
+*.[oO][gG][gG]
+*.[oO][pP][uU][sS]
+*.[wW][mM][aA]
+*.[aA][iI][fF][fF]
+*.[aA][iI][fF]
+*.[aA][mM][rR]
+
+# Local tool settings and credentials.
+.claude/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Operating system and editor temporary files.
+.DS_Store
+Thumbs.db
+~$*
+*.tmp
